@@ -89,7 +89,7 @@
     
     <script>
     var carIndx=0;
-    window.addEventListener("load", function(){setTimeout(Showslide,3000);})
+    window.addEventListener("load", function(){Showslide()})
     function Plus(n){        
         carIndx=carIndx+n;
         setTimeout(Showslide,3000)
@@ -114,7 +114,7 @@
     if(carIndx<0){carIndx=slide.length;}
     slide[carIndx-1].style.display="block";
     dot[carIndx-1].classList.add("active")
-    
+    setTimeout(Showslide,3000)
 }
 
     </script>
