@@ -1,0 +1,38 @@
+.servicehead{align-self: center;}
+.servicebutton{display:block;width:150px;height:70px;
+    margin:0 auto 20px;background-color:#67b1e2;border:solid 0px;border-radius:10px;
+    font:normal bold 15px Courier,Verdana}
+    .servicebutton:hover{animation:enlarge 1s;width:180px;height:90px;cursor:pointer;}
+    @keyframes enlarge{
+        from{width:150px;height:70px}
+        to{width:180px;height:90px}
+    }
+    fieldset{border:unset;position:relative;margin:10px auto}
+.topchoice{width:200px;padding:10px ;border:none;margin-left: 30px;}
+.topchoice{border-bottom:solid 5px #209cee}
+.topchoice:hover{border-bottom:solid 5px #209cee}
+.choicecont{display: flex;width:80%;justify-content: space-around;margin:0 auto}
+/* .servicediv{display:none} */
+.serviceform label,.serviceform input{width:60%}
+.serviceform label{position:absolute;;padding:5px;left:5%}
+.serviceform input:focus +label,.serviceform input:valid +label{height:10px;font-size:smaller;top:-2px;color: #209cee;}
+
+.bundlespan{display: block;background-color: #ffffff;width:70%;padding: 10px;}
+
+.errorlist::before{content: "*";}.errorlist{color:#f10022}
+.bundlespan{ margin:10px;border-radius:10px;height:50px;font-size:18px}
+.bundlespan:hover{background-color:#ddffee}
+.datapromo{float: right;margin-right:100px;height:300px;width: 300px;display: flex;justify-content: center;box-shadow: 1px 1px 8px 0px #209cee;padding-top:10px;
+background-image: url("/static/Images/surprise2.jpg"),url("static/Images/surprise3.png");
+background-repeat: no-repeat;background-blend-mode:normal;background-position: top;background-size: cover;color:#209cee}
+
+.datapromo h2{font-weight:normal;}
+.dial{
+    width:200px;margin:0 auto;margin-top: 10px;pointer-events: all;background-color: #fff;box-shadow: 2px 2px 8px;padding:10px
+}
+.dialbtn{width:25%;height: 40px;border-radius: 10px;float:left;margin:5px}
+.dialX{display:block;margin: 0 auto;padding:10px;border-radius: 20px;width:80px}
+.dial{pointer-events: all;background-color: #fff;box-shadow: 2px 2px 8px;padding:10px;position: absolute;margin: auto auto;z-index: 2;width:400px;height: auto;;}
+.dial input{display: block;margin: 0 auto;height:30px;border-radius:10px;text-align:center}
+.dial input,.dial button{background-color:initial;}
+.dial p{font-size:20px;color:#209cee}

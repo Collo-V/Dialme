@@ -1,0 +1,85 @@
+
+.regform,.loginform{height:fit-content;max-height: 700px;align-self:center;padding-bottom:50px; width: 425px;display: flex;flex-direction: column;background-color: #fff;position: relative;box-shadow:1px 1px 800px;;border-radius:20px}
+
+input,label{width:70%;margin-left:20px}
+.regform label,label{position:absolute;left:0px}
+input:focus + label,input:valid + label{color:#209cee;font-size:smaller}
+
+input{border-width: 0px 0px 2px;border-color:#209cee;height:40px}.regform label{position: absolute;}
+input:invalid{color:#f00}  
+.fieldWrapper{margin:0px 0px 40px;position: relative;}
+.regbutton{width:200px;align-self:center;font-size:15px;background-color:#209cee;font-family: verdana;color:#fff;border:none;border-radius:20px;padding: 10px;}
+.regimage{position:absolute;height:inherit;width:inherit;height:99.95%;border-radius:20px;}
+.fieldcont{margin:200px 0px 20px;z-index:1;position:relative} .loginform .fieldcont{margin-top: 50px;}
+.signuplink a{text-decoration:none;color:#209cee}.signuplink a:hover,.signuplink a:visited{color:#209cee}
+.errorlist{font-size: smaller;color:#ff3100} .errorlist::before{content: "*";color:#f00}
+#otherdetails{display: none;}
+
+.loginform div:first-of-type{margin-bottom: 50px;}
+.loginform .regbutton{height: 40px;}
+.loginform input{height: 50px;}
+.forgotpas{display: block;text-decoration: none; color: #209cee;float: right;margin:0px 20px 10px} .forgotpas:hover,.forgotpas:visited{color: #209cee;}
+.fgtpascont{height:80px}
+.viewpass{position: absolute;right:15%;border:none;font-size: 15px;top:35%;z-index: 2;margin:auto;display:inline;color:#666666;}
+.loginform .logo{ align-self: center;height: 150px;width: 150px;border-radius: 50%;margin-top: 20px;}
+.loginhead{margin-top: 30px;align-self: center; font-size: 30px;color: #209cee;}
+.reginput{height:40px}
+
+/* .logoroll{
+display: block;
+  width: 100px;
+  height: 100px;
+  background: red;
+  border-radius: 50%;
+  background: -webkit-radial-gradient(25px 25px, circle, red, #000);
+  background: -moz-radial-gradient(25px 25px, circle, red, #000);
+  background: radial-gradient(25px 25px, circle, red, #000); */
+ 
+  /* Animation to spin and move the sphere */
+  /* -webkit-animation: spin 1000ms linear infinite, moveLeftToRight 5s linear infinite;
+  -moz-animation: spin 1000ms linear infinite, moveLeftToRight 5s linear infinite;
+  -ms-animation: spin 1000ms linear infinite, moveLeftToRight 5s linear infinite;
+  animation: spin 1000ms linear infinite, moveLeftToRight 5s linear infinite;
+  
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+  
+  position: absolute;
+  left: 0;
+} */
+
+/* Spinning the sphere using key frames */
+/* @-ms-keyframes spin {
+  from { -ms-transform: rotate(0deg); }
+  to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+} */
+
+/* Move sphere from left to right */
+/* @-moz-keyframes moveLeftToRight {
+  0%   { left: -100px; }
+  100% { left: 95%; }
+}
+@-ms-keyframes moveLeftToRight {
+  0%   { left: -100px; }
+  100% { left: 95%; }
+}
+@keyframes moveLeftToRight {
+  0%   { left: -50px; }
+  100% { left: 85%; }
+}
+@-webkit-keyframes moveLeftToRight {
+  0%   { left: -100px; }
+  100% { left: 95%; }
+} */

@@ -1,0 +1,88 @@
+{% extends 'basehtml.html'%}
+
+{% block stylesheet%}
+<link rel="stylesheet" href="/static/css/services.css">
+<style>
+    #footer{position: absolute;bottom:0%;height:400px;}
+</style>
+
+{% endblock %}
+{% block content%}
+<div class="content">
+{% if bundleoptions %}
+
+<div class="servicediv" id="divBundles">
+    <h3>airtime Balance:{{airtime}}</h3>        
+        
+        <div class="topchoicecont"><button class="bundlepchoice" type="button" onclick="topchoices(0)">Normal Data</button><button class="bundlechoicechoice" type="button" onclick="topchoices(1)">Data Offers</button></div>
+        <div class="bundlesdiv" id="dailybundles">
+            <form action="/services/bundles" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="bundlechoice">
+                {% for choice in bundleoptions.dailybundles %}
+                <button type="submit" class="bundlespan" onclick="document.getElementsByName('bundlechoice')[0].value=this.innerText"> {{choice}}</button>
+
+                {% endfor %}
+                {% for choice in bundleoptions.weeklybundles %}
+                <button type="submit" class="bundlespan" onclick="document.getElementsByName('bundlechoice')[0].value=this.innerText"> {{choice}}</button>
+
+                {% endfor %}
+                {% for choice in bundleoptions.monthlyhbundles %}
+                <button type="submit" class="bundlespan" onclick="document.getElementsByName('bundlechoice')[0].value=this.innerText"> {{choice}}</button>
+
+                {% endfor %}
+               </form>
+</div><script>document.getElementsByClassName('navlink')[1].style.borderBottom="solid 4px #209cee";</script>
+</div>
+
+{% else %}
+
+<div class="servicediv" id="divBundles">Bundles
+    <h3>airtime Balance:{{airtime}}</h3>        
+        
+        <div class="topchoicecont"><button class="bundlepchoice" type="button" onclick="topchoices(0)">Normal Data</button><button class="bundlechoicechoice" type="button" onclick="topchoices(1)">Data Offers</button></div>
+        <div class="bundlesdiv" id="dailybundles">
+            <form action="/services/sms" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="bundlechoice">
+                {% for choice in smsoptions.dailybundles %}
+                <button type="submit" class="bundlespan" onclick="document.getElementsByName('bundlechoice')[0].value=this.innerText"> {{choice}}</button>
+
+                {% endfor %}
+                {% for choice in smsoptions.weeklybundles %}
+                <button type="submit" class="bundlespan" onclick="document.getElementsByName('bundlechoice')[0].value=this.innerText"> {{choice}}</button>
+
+                {% endfor %}
+                <!-- 
+                {% for choice in bundleoptions.monthlyhbundles %}
+                <button type="submit" class="bundlespan" onclick="document.getElementsByName('bundlechoice')[0].value=this.innerText"> {{choice}}</button>
+
+                {% endfor %} -->
+               </form>
+               
+</div><script>document.getElementsByClassName('navlink')[3].style.borderBottom="solid 4px #209cee";</script>
+</div>
+{% endif %}</div>
+    <script src="/static/service.js"></script>   
+<script>if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+  }
+  </script>
+
+{% endblock %}
+{% block promo %}
+<div class="datapromo">
+    <div class='promotion'>
+        <h2>Deal of the Day</h2>
+        <h4>1 Gb plus Whatsapp</h4>
+        <h5>75 Bob</h5>
+    </div>
+</div>
+<script>
+    foot=document.getElementById("footer");
+       foot.classList.remove("footer");
+       if (screen.height>window.innerHeight){
+           foot.classList.add("footer");}
+           
+</script>
+{% endblock %}

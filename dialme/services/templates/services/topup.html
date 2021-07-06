@@ -1,0 +1,71 @@
+{% extends 'basehtml.html'%}
+
+{% block stylesheet%}
+<link rel="stylesheet" href="/static/css/services.css">
+<style>
+    #footer{position: absolute;bottom:0%;height:400px;}
+</style>
+
+{% endblock %}
+{% block content%}
+<div class="content">
+{% if not okoabals %}
+<div class="servicediv" id="divTopUp"><br><br>
+    <div class="choicecont"><button class="topchoice" onclick="topchoices(0)">My Number</button><button class="topchoice"  onclick="topchoices(1)">Other Number</button></div>
+    <form action="/services/topup" method="POST" class="serviceform">
+        {%csrf_token%}
+        <input type="hidden" name="serviceop" id="serviceop" value="TopUp">
+        
+        <fieldset id='recp'><input type="number" name="recpnum" id="recpnum"><label for="recpnum" id="recplabel">The Number:</label></fieldset>
+        <fieldset><input type="number" name="scratch" id="scratch" ><label for="scratch" id='scratchlabel'>Scratch PIN</label></fieldset>
+        <button type="submit">Buy</button>
+        {%if text%}
+        <p class=text>{{text}}</p>
+        {% endif %}
+    
+    </form>
+ </div>   
+<script>document.getElementsByClassName('navlink')[0].style.borderBottom="solid 4px #209cee"</script>
+{% else %}
+<div class="servicediv" id="divOkoa">
+    <form action="/services/okoa" method="POST">
+        {%csrf_token%}
+        <span id="okoataken" classs="okoa">Okoa Debt: {{okoabals.okoataken}}</span><span id="okoataken" classs="okoa">Okoa Limit: {{okoabals.okoalimit}}</span>
+        <input type="hidden" name="serviceop" id="serviceop" value="Okoa">
+        {% if message%}
+        <p class="errorlist" name="message">{{message}}</p>
+        {% endif %}
+        <fieldset><label for="okoatake">Okoa amount:</label><input type="number" name="okoatake" ></fieldset>
+        {%for limit in okoabals.limits%} <button class="limitspan" type="button" onclick="document.getElementsByName('okoatake')[0].value={{limit}}">{{limit}}</button>{% endfor %}<br>
+        <button type="submit">Continue</button></form>
+</div>
+</div>
+<script>document.getElementsByClassName('navlink')[2].style.borderBottom="solid 4px #209cee"</script>
+{% endif %}
+<script src="/static/service.js"></script>   
+<script>if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+  }
+  </script>
+  <script>
+  document.getElementById("recp").style.display="none";
+  document.getElementsByClassName("topchoice")[0].style.borderBottom="solid 5px #209cee"
+  document.getElementsByClassName("message")[0].style.fontSize="30px";
+
+
+  foot=document.getElementById("footer");
+foot.classList.add("footer");
+           
+
+
+
+function topchoices(n){
+        var a=document.getElementsByClassName('topchoice');
+        var y=document.getElementById("recp");
+        for(var i=0;i<a.length;i++){a[i].removeAttribute('style')}
+        a[n].style.borderBottom="solid 5px #209cee";
+        if(n==0){y.style.display="none";y.getElementsByTagName("input")[0].value=""}
+        if(n==1){document.getElementById("recp").style.display="block"}
+    }
+</script>
+{% endblock %}

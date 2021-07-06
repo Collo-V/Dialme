@@ -1,0 +1,102 @@
+{% extends "basehtml.html"%}
+
+{%block stylesheet%}
+<style>
+    #footer{display: none}
+</style>
+<link rel="stylesheet" href="/static/css/registration.css">
+<link rel="stylesheet" href="/static/css/fontawesome.css">   
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.7/css/all.css"> 
+{% endblock%}
+
+{% block content%}
+<div class="content">
+
+<form class="regform"action="/users/registration/" method="POST" autocomplete="off">
+    <img src="/static/Images/regimage1.jpg" class="regimage" alt="rew">
+    {%csrf_token%}
+    <div class="fieldcont" id="maindetails">
+ 
+    {{ form.non_field_errors }}
+<div class="fieldWrapper">
+    
+    {{ form.username }}<label for="{{ form.username.id_for_label }}">Your Number:</label>
+    {% if errors.username.error %}
+    <p class="errorlist">{{ errors.username.error }}</p>
+    {% endif %}
+</div>
+
+<div class="fieldWrapper">
+    {{ form.password1 }}<label for="{{ form.password1.id_for_label }}">Password:</label>
+    <p class="viewpass" id="hide" onclick="View(0)"> <i class="fas fa-eye-slash"></i></p><p class="viewpass" id="view" onclick="View(1)"> <i class="fas fa-eye"></i></p>
+</div>
+<div class="fieldWrapper">
+   {{ form.password2 }}<label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+    <p id="passworderror"></p>
+    {% if errors.password1.error %}
+    <p class="errorlist">{{ errors.password1.error }}</p>
+    {% endif %}
+</div>
+<p id="validity"></p>
+
+    <button class="regbutton"type="button" onclick="Details(0)">Continue <i class="fas fa-arrow-right"></i></button>
+    <P class="signuplink">Have an account? <a href="/users/login">Sign in</a></P>
+</div>
+
+
+<div class="fieldcont" id="otherdetails">
+    <div class="fieldWrapper">
+        {{ form.first_name }}<label for="{{ form.first_name.id_for_label }}">First Name:</label>
+    </div>
+    <div class="fieldWrapper">
+        {{ form.last_name}}<label for="{{ form.last_name.id_for_label }}">Last Name:</label>
+    </div>
+    <div class="fieldWrapper">
+        {{ form.mpin1 }}<label for="{{ form.mpin1.id_for_label }}">Set Mpesa PIN:</label>
+    </div>
+    <div class="fieldWrapper">
+        {{ form.mpin2 }}<label for="{{ form.mpin2.id_for_label }}">Confirm PIN:</label>
+        {% if errors.mpin2.error %}
+        <p class="errorlist">{{ errors.mpin2.error }}</p>
+        {% endif %}
+    </div>
+    <button class="regbutton"type="button" onclick="Details(1)"><i class="fas fa-arrow-left"></i>Back</i></button>
+    <button class="regbutton"type="submit">Register</button>
+        <P class="signuplink">Have an account? <a href="/users/login">Sign in</a></P>
+
+</div>
+</form>
+</div>
+
+<script href="/static/dialme.js"></script>
+<script>
+    function Details(n){
+        main=document.getElementById("maindetails");
+        others=document.getElementById("otherdetails");
+        if(n==0){
+            
+            main.style.display="none";
+            others.style.display="block"
+            
+        }
+        else{
+            main.style.display="block";
+            others.style.display="none"
+        }
+    }
+    function View(n){
+        var a=document.getElementById("password1");
+        var b=document.getElementById("view");
+        if(n==1){
+            a.type="text";
+            b.style.display="none";
+        }
+        else{
+            a.type="password";
+            b.style.display="inline";
+        }
+       
+    }
+    
+</script>
+{% endblock%}

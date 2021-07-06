@@ -1,0 +1,121 @@
+{% extends 'basehtml.html'%}
+% block stylesheet %}
+<link rel="stylesheet" href="/static/fontawesome.css">
+<style>
+   
+</style>
+{ % endblock %}
+{% block homepage%}
+    <div class="carouselcont">
+        <div class="dotcont"><span class="dot" onclick="Currentslide(0)"></span><span class="dot"onclick="Currentslide(1)"></span><span class="dot"onclick="Currentslide(2)"></span><span class="dot"onclick="Currentslide(3)"></span></div>
+        <div class="arrow arrowleft" onclick="Plus(-1)"><i class="fas fa-angle-left"></i></div><div class="arrow arrowright"  onclick="Plus(1)"><i class="fas fa-angle-right"></i></div>
+        <div class="carousel car1"style="display: block;" >
+            <div>Your adhoc motor boat in internet surfing </div>
+        </div>
+        <div class="carousel car2" >
+            <div>Story iendelee offline with amazing sms bundles</div>
+        </div>
+        <div class="carousel car3">
+            <div>Send money accross netwoks using D-Cash</div>
+        </div>
+        <div class="carousel car4">
+            <div>Working From Home? Don't worry. We got your communication covered</div>
+        </div>
+    </div>
+    <div class="promo">
+        <h4>Quick links</h4>
+        <div class="promos">
+            <div>
+            <a href="/services/mpesa/send-money">Send Money</a>
+            <a href="/services/mpesa/withdraw">Withdraw</a>
+            <a href="services/airtime">Buy Airtime</a>
+        </div>
+        <div>
+            <a href="services/topup">Recharge</a>
+            <a href="services/bundles">Buy Data</a>
+            <a href="services/sms">Buy sms</a>
+        </div></div>
+        
+    </div>
+    <div class="ads">
+        <div class="offer">
+            <h5>Dial app comming soon</h5>
+            <p>Help us rate our new app before release by becoming a beta tester</p>
+            <a href=""><button>Gladly</button></a>
+
+        </div>
+        <div class="offer">
+            <h5>Use Dial-Cash to buy airtime, send and withdraw cash</h5>
+            <a href="services/mpesa"><button>Let's go</button></a>
+        </div>
+        <div class="offer">
+            <img src="/static/Images/browse4.jpg">
+            <h5>Data offers that make you feel at home while working at home</h5>
+            <a href="services/bundles"><button>Give me that</button></a>
+        </div>
+        <div class="offer">
+            <img src="/static/Images/surprise.jpg">
+            <h4>Get your data deal of the day</h4>
+
+        </div>
+        <div class="offer">
+            <h5>Find how much bundles you'll get with the money you have</h5>
+            
+            <form action="" method="POST" id="planform">
+                {%csrf_token%}
+                <input type="number" name="amount" id="">
+
+            </form><br>
+            <a href="services/mpesa"><button>Show me</button></a>
+        </div>
+        <div class="offer">
+            <img src="/static/Images/chat2.jpg">
+            <h5>Stori ishike kushika with SMS bundles you'll not find anywhere else!</h5>
+            <a href="services/bundles"><button>Buy now</button></a>
+        </div>
+        <div class="offer">
+            <img src="/static/Images/browse3.jpg">
+            <h5>Dial for your kids future!</h5>
+            <p>Help your kids learn at home by getting the free daily Elimika bundles on dial</p>
+            <a href="services/bundles"><button>Get the bundles</button></a>
+        </div>
+        <div class="offer">
+            <img src="/static/Images/talk-on-phone1.jpg">
+            <h5>Vutia wasee waya with Dial voice  meant just for you!</h5>
+            <a href="services/bundles"><button>Lets's go</button></a>
+        </div>
+        
+    </div>
+    
+    <script>
+    var carIndx=0;
+    window.addEventListener("load", function(){setTimeout(Showslide,3000);})
+    function Plus(n){        
+        carIndx=carIndx+n;
+        setTimeout(Showslide,3000)
+        // Showslide(1)
+    }
+    function Currentslide(n){
+        carIndx=n;
+        setTimeout(Showslide,3000)
+        // Showslide(1);
+
+    }
+    function Showslide(n=0){
+        if(n!=0){carIndx=carIndx;clearTimeout(Showslide)}
+        var slide=document.getElementsByClassName("carousel");
+        var dot=document.getElementsByClassName("dot");          
+    for(var i=0;i<slide.length;i++){                    
+        slide[i].style.display="none";
+        dot[i].classList.remove("active");
+    }
+    carIndx++
+    if(carIndx>slide.length){carIndx=1;}
+    if(carIndx<0){carIndx=slide.length;}
+    slide[carIndx-1].style.display="block";
+    dot[carIndx-1].classList.add("active")
+    
+}
+
+    </script>
+    {%endblock%}

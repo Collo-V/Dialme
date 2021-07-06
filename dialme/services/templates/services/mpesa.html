@@ -1,0 +1,135 @@
+{% extends 'basehtml.html'%}
+
+ {% block stylesheet%}
+<link rel="stylesheet" href="/static/css/services.css">
+<link rel="stylesheet" href="/static/css/fontawesome.css">
+<style>
+    #footer{position: absolute;bottom:0%;height:400px;}
+</style>
+{% if mpinrequired %}
+<style>
+    .body,.content,.mpesadiv,.balancediv,.menu,form,body{pointer-events:none;background-color:#b6b6b6;position: relative;}
+    form{display: flex;justify-content: center;}
+    button,input{background-color: #d2d2d2;}
+    .mpesadiv,form,.balancediv{display: none;}
+    
+</style>
+{% endif %}
+{% endblock %}
+{% block content%}
+<div class="content">
+{% if mpinrequired %}
+    <div class="dial" style="display: block;">
+        <p>{{message}}</p>
+        <input type="text" name="mpesapin" type="number">
+        <button type="button" class="dialbtn" onclick="Dial(1)">1</button><button type="button" class="dialbtn"onclick="Dial(2)">2</button><button type="button" class="dialbtn"onclick="Dial(3)">3</button><button type="button" class="dialbtn"onclick="Dial(4)">4</button><button type="button" class="dialbtn"onclick="Dial(5)">5</button>
+        <button type="button" class="dialbtn"onclick="Dial(6)">6</button><button type="button" class="dialbtn"onclick="Dial(7)">7</button><button type="button" class="dialbtn"onclick="Dial(8)">8</button><button type="button" class="dialbtn"onclick="Dial(9)">9</button><button type="button" class="dialbtn"onclick="Dial(0)">0</button>
+        <button type="button" class="dialbtn"onclick="Dial('OK')">OK</button>
+        <button type="button" class="dialbtn"onclick="Dial('backspace')"><i class="fas fa-long-arrow-alt-left"></i></button>
+        <button type="button" class="dialX" onclick="Dial('hide')">Cancel</button>
+        
+    </div>
+    {% endif %}
+{%if mpesa%}
+<div class="balancediv"><p class="mpesabal">Mpesa Balance: {{mpesa}}</p><button onclick="">Hide</button></div>
+{% else%}
+<div class="balancediv"><button onclick="Dial('show')" id="bals">Show Mpesa balance</button></div>
+{% endif %}
+<form action="" method="POST" id="mpesaform">
+    {%csrf_token%}
+    <input type="hidden" name="mpin" type="text">
+    <input type="hidden" name="option" id="option" type="text">
+    <div class="menu"><input type="hidden" name="option" id="mpesaoptions">
+    <a href="/services/mpesa/send-money"><button type="button">Send Money</button></a>
+    <a href="/services/mpesa/withdraw"><button type="button">Withdraw Cash</button></a>
+    <a href="/services/mpesa/airtime"><button type="button">Buy airtime</button></a>
+    <a href="/services/mpesa/paybill"><button type="button">Pay your bills</button></a></div>
+    
+    
+    {% if mpesaoption == "sendmoney" %}
+    <div id="sendmoney"class="mpesadiv">
+        <fieldset class="mpesafield"><input name="recpnum"type="number" required value={{form.recpnum}}><label for="recpnum" >Number</label></fieldset>
+        <fieldset class="mpesafield"><input name="sendamount" type="number" required value={{form.sendamount}}><label for="recpnum">Amount</label></fieldset>
+        <button type="submit" >Continue</button>
+    </div>
+    {% elif mpesaoption == "withdraw" %}
+    <div id="withdraw" class="mpesadiv">
+        <fieldset class="mpesafield"><input name="agentnum"type="number" required value={{form.agentnum}}><label for="recpnum" >Agent Number</label></fieldset>
+        <fieldset class="mpesafield"><input name="withamount" type="number" required value={{form.withamount}}><label for="recpnum">Amount</label></fieldset>
+        <button type="submit">Continue</button>
+    </div>
+    {% elif mpesaoption  == "paybill" %}
+    <div id="paybill" class="mpesadiv">
+        <div class="choicecont"><button id="mynuber" type="button" class="topchoice"onclick="topchoices(0)">Mynumber</button><button type="button" class="topchoice" id="othernuber"onclick="topchoices(1)">Other number</button></div>                 
+        <fieldset class="mpesafield"><input name="paybill"type="number" required value={{form.paybill}}><label for="agentnum" >Number</label></fieldset>
+        <fieldset class="mpesafield"><input name="billamount"type="number" required value={{form.billamount}}><label for="billamount">Amount</label></fieldset>
+        <button type="button"onclick="document.getElementById('mpesaoptions').value='paybill';document.getElementsByClassName('dial')[0].style.display='block'">Continue</button>
+    </div>
+    {% elif mpesaoption  == "buy airtime" %}
+    <div id="airtime" class="mpesadiv">
+        <div class="choicecont"><button class="topchoice active" onclick="topchoices(1)" type="button">My Number</button><button class="topchoice" type="button" onclick="topchoices(0)">Other Number</button></div>
+    
+        <fieldset id='recp'><input type="number" name="recpnum" value={{form.recpnum}}><label for="recpnum" id="recplabel">The Number:</label></fieldset>
+        <fieldset><input type="number" name="amount" id="amount" value={{form.amount}}><label for="amount" id='scratchlabel'>Amount</label></fieldset>
+        <button type="submit">Buy</button>
+        {%if text%}
+        <p class=text>{{text}}</p>
+        {% endif %}
+    </div>
+    <p></p>
+    {% endif %}
+</form>
+</div>
+    
+        
+    <script src="/static/service.js"></script> 
+    <script>document.getElementsByClassName('navlink')[4].style.borderBottom="solid 4px #209cee"</script>  
+<script>if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+  }
+  </script>
+  {% if mpinrequired %}
+  <script>
+    document.getElementsByClassName("modal")[0].style.display="block";
+    var a=document.getElementsByClassName("dial")[0];
+    a.style.backgroundColor="#dad2d2";
+    a.style.opacity=".8";
+    a.style.pointerEvents="none";              
+
+  </script>
+  {% endif %}
+  <script>
+      
+      function Dial(n){
+        pin=document.getElementsByName('mpesapin')[0];
+        if(n<=9){
+            pin.value=pin.value+n.toString()
+        }
+        else if(n=="OK"){
+           document.getElementsByName("mpin")[0].value=document.getElementsByName("mpesapin")[0].value;
+           var y=document.getElementById("mpesaform");
+           y.submit();
+        }
+        else if(n=="backspace"){
+            a=pin.value;
+           n=a.replace(a.charAt(a.length-1),"");
+           pin.value=n
+           
+        }
+        else if(n=="show"){
+            document.getElementsByClassName("dial")[0].style.display="block" ;
+            document.getElementById("mpesaoptions").value="checkbal"         ;      }
+        else{
+            document.getElementById("option").value="cancel" ; 
+            document.getElementById("mpesaform").submit();
+        }
+      }
+      
+      foot=document.getElementById("footer");
+       foot.classList.remove("footer");
+       if (screen.height>window.innerHeight){
+           foot.classList.add("footer");}
+           
+  </script>
+    
+    {%endblock%}

@@ -1,0 +1,56 @@
+{% extends 'basehtml.html'%}
+
+ {% block stylesheet%}
+<link rel="stylesheet" href="/static/css/services.css">
+
+{% endblock %}
+{% block content%}
+    <div><h1 class="servicehead">Select a service...</h1></div>
+    
+    
+        <div class="services">
+        
+            <input type="hidden" name="choice" id="choice">
+            
+            {% for service in skeys%}
+            {% if not choice%}
+            <button class="servicebutton" id="{{ service}}" type="submit" onclick="document.getElementById('choice').value=this.id;choices()">{{ service }}</button>
+            {%else%}
+            <span id="choicecheck" style="display: none;">{{choice}}</span>
+            <button class="sbutton" id="{{ service}}" type="submit" onclick="document.getElementById('choice').value=this.id;choices()" >{{ service }}</button>
+            {% endif %}
+            {% endfor %}
+            
+        
+
+        </div>
+        
+    
+        <!--  limits({{limit}})-->
+
+
+    </div>
+    
+    
+    <div class="servicediv" id="divSMS">SMS<form action="/services/" method="POST">
+        {%csrf_token%}
+        <input type="hidden" name="serviceop" id="serviceop" value="SMS"></form>
+    </div>
+    <div class="servicediv" id="divBonga">Bonga
+        <form action="/services/" method="POST">
+            {%csrf_token%}
+            <input type="hidden" name="serviceop" id="serviceop" value="Bonga"></form>
+    </div>
+    <div class="servicediv" id="divMpesa">Mpesa
+        <form action="/services/" method="POST">
+            {%csrf_token%}
+            <input type="hidden" name="serviceop" id="serviceop" value="Mpesa"></form>
+    </div>
+        
+    <script src="/static/service.js"></script>   
+<script>if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+  }
+  </script>
+    
+    {%endblock%}
