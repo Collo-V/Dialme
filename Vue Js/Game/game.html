@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>Game</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div id="gamediv">
+        <span class="index" >Index: {{index}}</span><button v-on:click="obstacle();remover();offset();incindex()">Start</button><span> bar1:{{bar1.offs}}</span><span> " " bar2:{{bar2.offs}}</span>
+        <span>  " " bar3:{{bar3.offs}}</span><span>  " " dino:{{dino.offs}}</span><span>" "Jump:{{dino.top}}</span>
+        <div class="imagediv" v-on:click="jump()" v-on:dblclick="duck">
+            <img v-bind:src="image1" alt="" id="dino" ref="dino">
+            <img src="Images/obs1.png" alt="" id="obs1" ref="obs1" v-bind:style="bar1.post"><img src="Images/obs2.png" id="obs2" ref="obs2"v-bind:style="bar2.post"> <img src="Images/obs3.png" alt=""id="obs3" ref="obs3"v-bind:style="bar3.post">
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+#gamediv{
+    position: relative;width: 100%;height: 400px;text-align: center;padding-top: 30px;
+}
+.index{margin: 0 auto;;background-color: #ffffff;}
+.imagediv{color: #111;}
+.imagediv{border-bottom: solid 2px ;width: 100%;height: 300px;position: relative;text-align: left;}
+.imagediv img{height: 50%;position: absolute;bottom:0%;margin-left: 50px;}#dino{left:100px}
+.obstacle{animation: move 6s;position: absolute;right: 0;float: right;height:30%;}
+#obs1,#obs2,#obs3{visibility: hidden;width: 80px;}
+
+
+
+.jump{animation: jump 1s ;}
+@keyframes jump {
+    0%{bottom: 0%;}
+    25%{bottom: 160px;}
+    50%{bottom: 160px;}
+    75%{bottom: 140%;}
+    100%{bottom: 0%;}
+    
+     /* from{bottom:0px}
+     to{bottom: 200px;} */
+}
+@keyframes move {
+    from{right:0px;visibility: visible;}
+    to{right:95%;visibility: visible;}
+    /* from{visibility: visible;} */
+    /* to{visibility: visible;} */
+}
