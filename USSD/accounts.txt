@@ -1,7 +1,0 @@
-airtime_bal:9
-bonga_bal:59
-bundle_bal:500
-sms_bal:0
-okoa_bal:0
-okoa_limit:150
-okoa_taken:0
