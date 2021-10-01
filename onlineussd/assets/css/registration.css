@@ -1,0 +1,5 @@
+.regform{ width: 100%;display: flex;flex-direction: column;background-color: #1eb7f3;}
+.reginput,label{width:90%;margin-left:20px}
+.regform input:last-of-type{width:100px;align-self:center;font-size:15px;color:#6cd1df;font-family: verdana;}
+.reginput:invalid{color:#f00}  
+.fieldWrapper{margin:0px 0px 20px}

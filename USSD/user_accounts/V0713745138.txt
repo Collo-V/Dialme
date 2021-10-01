@@ -1,0 +1,8 @@
+airtime_bal:130
+bonga_bal:88
+bundle_bal:40
+sms_bal:0
+okoa_bal:181
+okoa_limit:615
+okoa_taken:0
+mpesa_bal:200

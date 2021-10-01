@@ -92,17 +92,18 @@
     window.addEventListener("load", function(){Showslide()})
     function Plus(n){        
         carIndx=carIndx+n;
-        setTimeout(Showslide,3000)
+        // setTimeout(Showslide,3000)
         // Showslide(1)
+        Showslide(1);Showslide()
     }
     function Currentslide(n){
         carIndx=n;
-        setTimeout(Showslide,3000)
-        // Showslide(1);
+        // setTimeout(Showslide,3000)
+        Showslide(1);Showslide()
 
     }
     function Showslide(n=0){
-        if(n!=0){carIndx=carIndx;clearTimeout(Showslide)}
+        if(n==0){clearTimeout(Showslide);
         var slide=document.getElementsByClassName("carousel");
         var dot=document.getElementsByClassName("dot");          
     for(var i=0;i<slide.length;i++){                    
@@ -115,6 +116,8 @@
     slide[carIndx-1].style.display="block";
     dot[carIndx-1].classList.add("active")
     setTimeout(Showslide,3000)
+     }
+     else{return}
 }
 
     </script>
