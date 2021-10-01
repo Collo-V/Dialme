@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%block stylesheet%}
+
+    {% endblock %}
+    
+    <link rel="stylesheet" href="/static/css/fontawesome.css">   
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.7/css/all.css"> 
+    <link rel="stylesheet" href="/static/css/ussdCSS.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/Images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/Images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/Images/favicon-16x16.png">
+    <link rel="manifest" href="/static/site.webmanifest">
+    <title>Dialme</title>
+    
+</head>
+<header class="header">
+    <a href="/"><img src="/static/Images/logo.png" class="logoroll"><img src="/static/Images/Dial.png"></a>
+    {%if user.is_authenticated%}
+    <ul class="log">
+
+        <li><span id="greeting"></span>  <span>, {{user.first_name}}</span></li>
+        <li><form action="/users/logout/" method="POST">
+        {%csrf_token%}
+        
+            <button type="submit">Logout</button> </li>           
+        </ul>
+    </form>
+    {%else%}
+    <ul class="log">
+        <li><a href="/users/login/"><button>Login</button></a></li>
+        <li><a href="/users/registration/"><button>Register</button></a></li>
+    </ul>
+    {% endif %}
+    <body><div class="empty"></div>
+    
+    </header>
+    <nav>
+        
+        <a href="/"><img src="/static/Images/logo.png" class="mobilelogo"></a>
+        <ul class="navul" >
+            <div>
+            <li class="navlist"><a href="/services/topup" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                this.style.borderBottom='solid 5px #209cee'">Topup</a></li>
+            <li class="navlist"><a href="/services/bundles" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                this.style.borderBottom='solid 5px #209cee'">Data</a></li>
+            <li class="navlist"><a href="/services/okoa" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                this.style.borderBottom='solid 5px #209cee'">Okoa</a></li>
+            <li class="navlist"><a href="/services/sms" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                this.style.borderBottom='solid 5px #209cee'">Sms Bundles</a></li>
+            <li class="navlist"><a href="/services/mpesa" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                this.style.borderBottom='solid 5px #209cee'">Mpesa</a></li>
+            </div>
+
+        </ul>
+        <div class="dropdown">
+            <button class="navbtn"><i class="fas fa-bars"></i></button>
+            <div class="drop">
+                <li class="navlist"><a href="/services/topup" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                    this.style.borderBottom='solid 5px #209cee'">Topup</a></li>
+                <li class="navlist"><a href="/services/bundles" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                    this.style.borderBottom='solid 5px #209cee'">Data</a></li>
+                <li class="navlist"><a href="/services/okoa" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                    this.style.borderBottom='solid 5px #209cee'">Okoa</a></li>
+                <li class="navlist"><a href="/services/sms" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                    this.style.borderBottom='solid 5px #209cee'">Sms Bundles</a></li>
+                <li class="navlist"><a href="/services/mpesa" class="navlink" onclick="var x=document.getElementsByClassName('navlink');var i=0;for(i;i<x.length;i++){x[i].style.borderBottom='none'}
+                    this.style.borderBottom='solid 5px #209cee'">Mpesa</a></li>
+                    {%if user.is_authenticated%}
+                    <ul class="log">
+                
+                        <li><form action="/users/logout/" method="POST">
+                        {%csrf_token%}
+                        
+                            <button type="submit">Logout</button> </li>           
+                        </ul>
+                    </form>
+                    {%else%}
+                    <ul class="log">
+                        <li><a href="/users/login/"><button>Login</button></a></li>
+                        <li><a href="/users/registration/"><button>Register</button></a></li>
+                    </ul>
+                    {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% block homepage %}
+    {% endblock %}
+    {%block content%}
+
+       {% endblock %}
+   {% block promo %}
+   {% endblock %}
+
+    </div>
+    <footer id="footer">
+        <div>
+            <h5>Dial Services</h5>
+            <a href="services/mpesa">Mpesa</a>
+            <a href="services/bundles">Data bundles</a>
+            <a href="services/sms">Sms bundles</a>
+            <a href="services/airtime">Airtime topup</a>
+        </div>
+        <div>
+            <h5>About US</h5>
+            <a href="">Dialme</a>
+            <a href="">Location</a>
+            <a href="services/sms">Contact Us</a>
+            <a href="">Dial Promotions</a>
+        </div>
+        <div>
+            <h5>Stake holders</h5>
+            <a href="http://www.fineteklabs.com/">Fineteklabs</a>
+            <a href="">C'n'S Company</a>
+            <a href="">Chandaria Industies</a>
+            <a href="">Airtime topup</a>
+        </div>
+    </footer>
+   <script src="/static/dialme.js"></script>
+   <script>
+   
+   foot=document.getElementById("footer");
+   var body = document.body,
+    html = document.documentElement;
+
+var height = Math.max( body.scrollHeight, body.offsetHeight, 
+    html.clientHeight, html.scrollHeight, html.offsetHeight );
+   if(screen.height-height>foot.offsetHeight) {
+    //    alert(screen.height.toString()+" "+window.innerHeight.toString())
+       
+   }
+   else{
+
+    //    alert(height)
+   }
+   </script>
+</body>
+</html>

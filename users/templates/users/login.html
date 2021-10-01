@@ -1,0 +1,62 @@
+{% extends "basehtml.html"%}
+{% block stylesheet %}
+<style>
+    #footer{display: none}
+</style>
+<link rel="stylesheet" href="/static/css/registration.css">
+<link rel="stylesheet" href="/static/css/fontawesome.css">   
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.7/css/all.css"> 
+{% endblock %}
+{% block content%}
+<div class="content">
+
+<form class="loginform" action="/users/login/" method="POST">
+    {%csrf_token%}
+    <img src="/static/Images/logo.png" class="logo">
+    <div class="loginhead"><i>Sign in to Dial</i></div>
+    <div class="fieldcont"> 
+
+    <div class="fieldWrapper">
+    
+        {{ form.username }}<label for="{{ form.username.id_for_label }}">Your Number:</label>
+        {% if errors.username.error %}
+        <p class="errorlist">{{ errors.username.error }}</p>
+        {% endif %}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.password }}<label for="{{ form.password.id_for_label }}">Password:</label>
+        <p class="viewpass" id="hide" onclick="View(0)"> <i class="fas fa-eye-slash"></i></p><p class="viewpass" id="show" onclick="View(1)"> <i class="fas fa-eye"></i></p>
+    </div>
+    
+    {% if request.GET.next%}
+    <input type="hidden" name="next" value="{{request.GET.next}}">
+    {% endif%}
+    {% if form.errors %}
+    <p class="errorlist">Incorrect usernumber/password</p>
+    {% endif %}
+    <div class="fgtpascont"><a class="forgotpas" href="#">Forgot Password?</a></div>
+    <input class="regbutton" type="submit" value="Login">
+
+    <p class=signuplink>Don't have an account yet? <a href="/users/registration/">Sign up</a> </p>
+</div>
+
+</form>
+</div>
+<script>
+    function View(n){
+        var a=document.getElementById("id_password");
+        var b=document.getElementById("show");
+        if(n==1){
+            a.type="text";
+            b.style.display="none";
+        }
+        else{
+            a.type="password";
+            b.style.display="inline";
+        }
+       
+    }
+</script>
+
+{% endblock%}
